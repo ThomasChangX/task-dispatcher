@@ -1,0 +1,135 @@
+# =============================================================================
+# timeouts.yaml - 超时配置
+# 4 种任务类型超时配置，对应 AGENTS.md 中的 Timeout 设置
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+# 超时配置定义 (4种)
+# ---------------------------------------------------------------------------
+timeout_profiles:
+  # ---------------------------------------------------------------------------
+  # 1. 调研/查询超时
+  # ---------------------------------------------------------------------------
+  - id: research
+    name: "调研/查询"
+    description: "适用于调研、查询、信息收集等任务"
+    timeout_seconds: 300
+    timeout_reason: "调研任务通常需要搜索和分析，5分钟足够完成基础调研"
+
+  # ---------------------------------------------------------------------------
+  # 2. 一般任务超时
+  # ---------------------------------------------------------------------------
+  - id: general
+    name: "一般任务"
+    description: "适用于常规开发、文档、审查等任务"
+    timeout_seconds: 300
+    timeout_reason: "一般任务默认 5 分钟超时"
+
+  # ---------------------------------------------------------------------------
+  # 3. 复杂任务超时
+  # ---------------------------------------------------------------------------
+  - id: complex
+    name: "复杂任务"
+    description: "适用于复杂功能开发、架构设计、多阶段任务"
+    timeout_seconds: 600
+    timeout_reason: "复杂任务需要更多时间进行设计、实现和验证"
+
+  # ---------------------------------------------------------------------------
+  # 4. 超大任务超时
+  # ---------------------------------------------------------------------------
+  - id: large
+    name: "超大任务"
+    description: "适用于大型项目开发、系统重构、多模块任务"
+    timeout_seconds: 1200
+    timeout_reason: "超大任务可能涉及多个模块或系统，需要更长时间"
+
+# ---------------------------------------------------------------------------
+# 任务类型与超时映射
+# ---------------------------------------------------------------------------
+task_timeout_mapping:
+  research:
+    timeout_profile: research
+    timeout_seconds: 300
+
+  documentation:
+    timeout_profile: general
+    timeout_seconds: 300
+
+  review:
+    timeout_profile: general
+    timeout_seconds: 300
+
+  scheduled:
+    timeout_profile: general
+    timeout_seconds: 300
+
+  general:
+    timeout_profile: general
+    timeout_seconds: 300
+
+  fix:
+    timeout_profile: complex
+    timeout_seconds: 600
+
+  feature:
+    timeout_profile: complex
+    timeout_seconds: 600
+
+  architecture:
+    timeout_profile: complex
+    timeout_seconds: 600
+
+  devops:
+    timeout_profile: complex
+    timeout_seconds: 600
+
+# ---------------------------------------------------------------------------
+# Agent 与超时映射
+# ---------------------------------------------------------------------------
+agent_timeout_mapping:
+  architect:
+    timeout_seconds: 600
+
+  coder:
+    timeout_seconds: 300
+
+  critic:
+    timeout_seconds: 300
+
+  devops:
+    timeout_seconds: 600
+
+  docs_writer:
+    timeout_seconds: 300
+
+  inspector:
+    timeout_seconds: 300
+
+  researcher:
+    timeout_seconds: 300
+
+  retrospective:
+    timeout_seconds: 300
+
+  reviewer:
+    timeout_seconds: 300
+
+  scheduler:
+    timeout_seconds: 300
+
+  tester:
+    timeout_seconds: 300
+
+  worker:
+    timeout_seconds: 300
+
+# ---------------------------------------------------------------------------
+# 全局超时设置
+# ---------------------------------------------------------------------------
+global_settings:
+  default_timeout: 300
+  max_timeout: 1200
+  min_timeout: 60
+  enable_timeout_extension: true
+  max_extension_retries: 2
+  extension_increment_seconds: 300
